@@ -1,7 +1,18 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS-20'
+    }
+
     stages {
+
+        stage('Environment Check') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
+            }
+        }
 
         stage('Build Frontend') {
             steps {
