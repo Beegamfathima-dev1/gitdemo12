@@ -3,17 +3,11 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build Frontend') {
             steps {
                 dir('frontend') {
-                    bat 'npm install'
-                    bat 'npm run build'
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
@@ -21,7 +15,7 @@ pipeline {
         stage('Build Backend') {
             steps {
                 dir('backend') {
-                    bat 'npm install'
+                    sh 'npm install'
                 }
             }
         }
@@ -32,7 +26,7 @@ pipeline {
                 stage('Frontend Tests') {
                     steps {
                         dir('frontend') {
-                            bat 'npm test -- --watchAll=false'
+                            sh 'npm test -- --watchAll=false'
                         }
                     }
                 }
@@ -40,7 +34,7 @@ pipeline {
                 stage('Backend Tests') {
                     steps {
                         dir('backend') {
-                            bat 'npm test'
+                            sh 'npm test'
                         }
                     }
                 }
